@@ -39,6 +39,7 @@ vibe-tools transforms unpredictable AI coding into a **guided journey on well-de
 ### The vibe-tools Difference:
 
 
+
 1. **You decide everything important upfront** - Business requirements, product design, architecture, and engineering decisions are made by you, not the AI
 2. **The AI follows your blueprint** - No unexpected technical decisions or creative interpretations
 3. **Task-by-task guidance** - The AI gets exactly the context it needs at each step, never losing track
@@ -75,6 +76,7 @@ This integration makes structured AI development accessible without changing you
 ```
 
 vibe-tools uses a straightforward but powerful architecture:
+
 
 
 1. **Cursor Integration via MCP** - Cursor connects to vibe-tools through the Model Context Protocol
@@ -118,6 +120,7 @@ The CLI can be used directly by developers or through the Cursor agent - giving 
 vibe-tools enforces a structured, gradual refinement process:
 
 
+
 1. **Define Business Requirements** - What problem are we solving and why?
 2. **Create Product Requirements** - What features will solve these problems?
 3. **Design Architecture** - How will we technically implement these features?
@@ -144,13 +147,7 @@ This approach means:
 | Difficult to maintain consistency | Enforces consistent structure and patterns |
 | When it fails, you start over | When it fails, reset just that specific task |
 
-## 📚 Learn More
+## 
 
-* [Project Workflow](./docs/project-initialization-workflow.md)
-* [Templates & Structure](./docs/project-templates-and-structure.md)
-* [Project Overview](./docs/overview.md)
-
-
----
 
 *vibe-tools: Plan first, then let AI code the details, staying on the tracks you carefully designed.*
