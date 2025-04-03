@@ -1,6 +1,6 @@
 # vibe-tools
 
-**Supercharge your AI coding experience with structured workflows and guardrails**
+**Supercharge your vibe experience with structured workflows and guardrails**
 
  ![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
  ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -10,7 +10,7 @@
 Using AI to write code (vibe coding) today is like using a **self-driving car without roads**:
 
 ```
-🚗 Unpredictable AI         vs        🚄 vibe-tools
+🚗 vibe coding              vs        🚄 vibe-tools
   
   "Just build it"                     "Follow these tracks"
       ↓                                     ↓
