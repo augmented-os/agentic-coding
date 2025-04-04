@@ -432,30 +432,26 @@ GET /tracking-categories
 
 ## Implementation Approach
 
+
 1. **Service-Based Architecture:**
-   - Implement service layer between API endpoints and database
-   - Group business logic in domain-specific services (ReceiptService, SupplierService, etc.)
-
+   * Implement service layer between API endpoints and database
+   * Group business logic in domain-specific services (ReceiptService, SupplierService, etc.)
 2. **Error Handling:**
-   - Consistent error response format: `{ error: { code, message, details } }`
-   - HTTP status codes mapped to error types
-
+   * Consistent error response format: `{ error: { code, message, details } }`
+   * HTTP status codes mapped to error types
 3. **Validation:**
-   - Request validation middleware for all endpoints
-   - Response validation to ensure data integrity
-
+   * Request validation middleware for all endpoints
+   * Response validation to ensure data integrity
 4. **Authentication & Authorization:**
-   - JWT-based authentication
-   - Role-based access (admin, bookkeeper, client)
-   - Tenant isolation via Row-Level Security
-
+   * JWT-based authentication
+   * Role-based access (admin, bookkeeper, client)
+   * Tenant isolation via Row-Level Security
 5. **Performance Considerations:**
-   - Pagination for all list endpoints
-   - Efficient queries using appropriate indexes
-   - Caching for reference data
-   
+   * Pagination for all list endpoints
+   * Efficient queries using appropriate indexes
+   * Caching for reference data
 6. **Event-Driven Processing:**
-   - Use events for asynchronous processes (OCR extraction, Xero sync)
-   - WebSocket notifications for real-time status updates
+   * Use events for asynchronous processes (OCR extraction, Xero sync)
+   * WebSocket notifications for real-time status updates
 
 

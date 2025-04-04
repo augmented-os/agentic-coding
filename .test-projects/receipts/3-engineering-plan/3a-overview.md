@@ -4,60 +4,16 @@ This directory contains the technical planning documents for the Receipt/Invoice
 
 ## Document Structure
 
-1. **[Technical Design](3b-technical-design.md)**
-   - Database schema and relationships
-   - API endpoints specification
-   - Authentication and authorization model
-   - Storage structure and organization
+1. **[Data Model](3b-data-model.md)** - Database schema and implementation details
+2. **[API Schema](3d-api-schema.md)** - API endpoints and integrations
+3. **[UI/UX Design](3c-ui-design.md)** - Interface specifications and workflow
+4. **[Implementation Plan](3e-implementation-plan.md)** - Development roadmap and approach
 
-2. **[UI/UX Design](3c-ui-design.md)**
-   - Interface specifications
-   - User flows
-   - Component details
-   - AI builder prompts
+## Core Workflow
 
-3. **[Development Roadmap](3d-development-roadmap.md)**
-   - Sprint planning
-   - Feature priorities
-   - Milestones and timelines
-   - Resource allocation
+The system implements a 6-step receipt processing workflow:
 
-4. **[Infrastructure Setup](3e-infrastructure.md)**
-   - Supabase configuration
-   - Environment setup
-   - Security implementation
-   - Deployment architecture
-
-5. **[Integration Specifications](3f-integration-specs.md)**
-   - Xero API integration
-   - Data transformation requirements
-   - Authentication requirements
-   - Error handling
-
-6. **[Testing Strategy](3g-testing-strategy.md)**
-   - Test scenarios
-   - Acceptance criteria
-   - QA process
-   - User testing plan
-
-## Implementation Approach
-
-The implementation will follow a phased approach as outlined in the Product Requirements Document:
-
-### Phase 1: Core Functionality
-Focus on building the essential database structure, file upload functionality, and basic workflow interface.
-
-### Phase 2: Usability Improvements
-Enhance the user experience with improved search, filtering, and status management.
-
-### Phase 3: Integration
-Complete the Xero integration and export functionality.
-
-## Next Steps
-
-1. Complete the technical design document with database schema
-2. Create UI/UX specifications for AI builder tools ✅
-3. Set up the Supabase project and initial tables
-4. Begin implementation of core functionality
+1. **Extract Details** → 2. **Match Supplier** → 3. **Assign Line Items** → 
+4. **Set Payment Details** → 5. **Push to Xero** → 6. **Complete**
 
 
