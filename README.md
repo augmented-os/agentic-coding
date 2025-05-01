@@ -1,92 +1,111 @@
-# Vibe Tools · AI‑First Developer Workflow
-
-> **Vibe Tools** is a set of conventions, templates and Cursor IDE playbooks that turn your codebase into a _self‑describing system_—one where both humans **and** AI agents can plan, code, test and ship with the same, deterministic workflow.
-
-&nbsp;
-
-| Feature | What it gives you |
-|---------|------------------|
-| **.cursor/rules** | Fine‑grained behaviour controls for Cursor IDE—split into _Always_, _Auto‑Attach_ and _Agent‑Requested_ rules. |
-| **.cursor/guides** | Project‑specific technical standards (libraries, file structure, code taste) written in MDC. |
-| **.cursor/actions** | Re‑usable playbooks (`DEBUG`, `REFACTOR`, `NEW_FEATURE`, `ANALYSE`, …) that drive step‑level agent behaviour. |
-| **.cursor/tasks** | Decomposed, YAML runbooks with acceptance tests and self‑validation check‑lists. |
-| **.cursor/.templates** | Scaffolds for new rules, guides, actions and tasks—used by the CLI wizard. |
-
-The result: each agent instance receives **only the context it needs**, follows a battle‑tested action script, and self‑validates against machine‑readable criteria.
+# Augmented‑Engineering 🚀  
+_Stop vibe coding, start AI augmented engineering_
 
 ---
 
-## Quick Start
+## 1 Why this repo exists – the problem we’re solving
 
-```bash
-# 1 · Install deps
-pnpm install   # or npm / yarn
+Large‑language models are brilliant sprinters but terrible marathoners: they forget everything between completions.  
+Cursor’s **Project Rules** give them a durable memory, **but only if _we_ control what goes in**.  
+Cursor’s own implicit context algorithm is powerful **yet still a moving target** – relevance scoring changes weekly and can miss critical files.  
+By version‑controlling every rule and reference _inside the repo_ we ensure that humans **and** AI share a single, dependable source of truth.
 
-# 2 · Bootstrap the workspace
-pnpm vibe init              # creates the .cursor/ tree
-pnpm vibe new:task FEAT-101 # scaffolds a runbook
-pnpm vibe run FEAT-101      # executes the task via Cursor
+---
+
+## 2 Architecture in one picture
+
+```
+repo/
+├── .cursor/          # _How_ we build  → AI guidance (rules, templates)
+├── .tasks/           # _What_ to build → Work items (YAML)
+└── src/…             # The product     → Code, tests, assets
 ```
 
-> The `vibe` CLI is a thin wrapper around Cursor’s local API plus a few lint hooks—see `scripts/` for commands.
+* **Rules** teach the Agent *how* we build software.  
+* **Tasks** tell the Agent (and us) *what* to build next.  
+Ideas become **Tasks** ➜ Tasks invoke **Rules** ➜ Rules change **Code** ➜ passing code closes Tasks – a virtuous loop.
 
 ---
 
-## Folder Layout
+## 3 Cursor Rules – opinionated but flexible
 
-```text
-.cursor/
-  rules/       # one file = one rule (MDC)
-  guides/      # deeper technical docs (MDC)
-  actions/     # step‑by‑step playbooks (MDC)
-  tasks/
-    0‑draft/   # un‑reviewed runbooks
-    1‑now/     # ready for execution
-    9‑done/    # auto‑archived
-  .templates/  # scaffolds for the CLI
+| Kind | Role in our system | Why it matters |
+|------|--------------------|----------------|
+| **Actions**    | Step‑by‑step playbooks (`EXECUTE_TASK`, `DEBUG`, …) | Turn chat commands into deterministic procedures |
+| **Behaviours** | Always‑on guard‑rails (style, naming, tone)        | Keep output consistent without nagging            |
+| **Guides**     | Deep‑dive reference docs (library policy, security) | Centralise decisions so we never rediscover them  |
+| **Tools**      | Cheat‑sheets for external CLIs / APIs              | Prevent “rm ‑rf prod” moments                     |
+
+Most files are **Agent‑Requested** – the Agent decides when to include them based on `description:` for leaner prompts.  
+We graduate to **Always** or **Auto‑Attached** only when guidance is universal or path‑specific.
+
+Templates live in `.cursor/.templates/`, so adding a rule is copy‑paste‑commit.
+
+---
+
+## 4 YAML Task Board – work items that explain themselves
+
+A task is _both_ a ticket and an executable spec:
+
+```yaml
+id: FEAT-102           # Immutable slug
+context:               # <– Cursor loads these first (critical!)
+  code:
+    - src/features/workflowDesigner/…
+  docs:
+    - .cursor/guides/ui/confirmations.mdc
+work_steps:            # Ordered, file‑level instructions
+  - step_id: 1
+    targets:
+      - src/…
+    instructions: Create DeleteConfirmationDialog…
+acceptance:            # Proof that we’re done
+  automated:
+    - command: "npm run test --silent"
+      description: All unit tests green
+  manual:
+    - description: Dialog matches design in Figma link
+self_checklist:        # “Did I … ?” reminders
+  - "No direct DOM manipulation"
 ```
 
-*Run `vibe doctor` to verify the structure and token budgets.*
+Because the schema is explicit, Cursor can:
+
+1. **Load context before editing** (no blind changes).  
+2. **Execute `work_steps` sequentially** via `edit_file`, `run_terminal_cmd`, etc.  
+3. **Prove success** by running the same commands we would script in CI.
+
+Lifecycle is pure Git: move the file between `0‑draft/`, `now/`, `next/`, `later/`, `done/` or just update `status:`.
 
 ---
 
-## Authoring a New Feature
+## 5 A day in the life ☀️
 
-1. **Draft** a runbook (`vibe new:task`) in `.cursor/tasks/0‑draft/`.
-2. **Review & move** to `1‑now/`.
-3. **Execute** via `vibe run <ID>`  
-   _Selector rule picks `NEW_FEATURE` → playbook adds scaffold files → agent codes test‑first._  
-4. **Auto‑validate**; on success the task moves to `9‑done/`.
-
----
-
-## Why “Vibe” Tools?
-
-* **Think‑Left Planning** – break decisions into small YAMLs _before_ coding starts.  
-* **Deterministic Context** – no hidden magic; every byte the model sees is visible in source control.  
-* **Human & AI Symmetry** – the same guides and actions work for pair‑programming or full automation.
+1. **Idea appears** in chat: “We should support dark mode.”  
+2. Dev runs `/Generate Task` → **`CREATE_TASK`** interviews them and emits `THEM‑201‑dark‑mode.yml` into `0‑draft/`.  
+3. Team refines acceptance criteria; file moves to `next/`.  
+4. Sprint starts. Agent (or dev) opens task and says “execute” → **`EXECUTE_TASK`** loads context, edits code, runs tests, ticks checklist.  
+5. All checks pass, PR auto‑opens with the diff; task file lands in `done/`.  
+6. Any new knowledge becomes a **Guide** so the next dev never repeats the research.
 
 ---
 
-## Roadmap
+## 6 Extending the system
 
-| Status | Item |
-|--------|------|
-| ✅ | MVP folder structure & templates |
-| 🔄 | CLI wizard (`vibe`) with lint & run commands |
-| ⬜ | GitHub Action for CI‑driven task execution |
-| ⬜ | Web dashboard (Augmented OS integration) |
+* **Add a rule** – copy a template, fill front‑matter, commit ✔️  
+* **Add a task** – copy `.templates/task-template.yml` or let `CREATE_TASK` do it ✔️  
+* **Tune behaviours** – tweak or add always‑on rules; the scaffolding won’t fight you ✔️  
 
 ---
 
-## Contributing
+## 7 Where to go next
 
-1. Fork → feature branch → PR.  
-2. Add/modify runbooks in `0‑draft/`; CI will auto‑execute them.  
-3. Follow the style guide in `guides/lang‑style.mdc`.
+* **Rule details & index** → [`./.cursor/README.md`](./.cursor/README.md)  
+* **Task schema & workflow** → [`./.tasks/README.md`](./.tasks/README.md)  
+* **Official docs** – Cursor > Context > [Rules](https://docs.cursor.com/context/rules)  
+* **Try it live** – open `task-example.yml` in Cursor Chat and type “Execute this task”.
 
 ---
 
-## License
-
-MIT © Augmented OS
+> Process should **accelerate** engineers, not handcuff them.  
+> Turning tacit know‑how into editable, executable files lets humans and AI play from the same sheet of music – freeing everyone to focus on the truly novel problems.

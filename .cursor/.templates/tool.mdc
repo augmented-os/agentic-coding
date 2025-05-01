@@ -1,0 +1,39 @@
+---
+description: NEW_TOOL_TEMPLATE
+globs: 
+alwaysApply: false
+---
+# Guide: Writing Tool Documentation
+
+Each tool documentation file (`.cursor/tools/*.mdc`) should adhere to the following structure and include relevant details for each section:
+
+1.  **Purpose:**
+    *   Briefly describe what the tool does and its primary function within our workflow or projects.
+
+2.  **Configuration & Setup:**
+    *   Detail any prerequisite steps required before using the tool (installation, authentication, environment variables, initialization commands, required files/configs).
+    *   List necessary configuration parameters (e.g., API keys, project IDs, file paths).
+    *   Include examples of configuration commands or file snippets.
+    *   Mention any test/dummy values if applicable (e.g., `supabase link --project-ref <your-project-ref>`).
+
+3.  **Common Commands / API Endpoints / Functions:**
+    *   List the most frequently used commands, functions, or API calls provided by the tool.
+    *   Use tables or lists for clarity.
+    *   For each item, provide:
+        *   The command/endpoint/function signature.
+        *   A clear description of what it does.
+        *   Crucial arguments or parameters.
+        *   Concise usage guidance, examples, or typical workflows (e.g., `Run 'db diff' before 'db push'`).
+
+4.  **Usage Restrictions & Best Practices:**
+    *   **Crucially, highlight any potentially destructive operations** (e.g., delete, update, push, execute) and mandate user confirmation or specific safety checks (like dry runs) before execution. Use **bold text** or warning emojis (⚠️) for emphasis.
+    *   Outline recommended workflows or patterns.
+    *   Mention common pitfalls or anti-patterns.
+    *   Include security considerations (handling secrets, sensitive data access).
+    *   Advise on error handling or interpreting common outputs.
+
+5.  **Examples (Optional but Recommended):**
+    *   Provide slightly more complex, multi-step examples demonstrating common use cases or workflows.
+
+6.  **Troubleshooting (Optional):**
+    *   List common error messages and their solutions.

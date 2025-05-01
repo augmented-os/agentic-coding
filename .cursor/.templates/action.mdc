@@ -1,0 +1,32 @@
+---
+description: NEW_ACTION_TEMPLATE
+globs: 
+alwaysApply: false
+---
+## Purpose / Objective (Optional)
+[Describe the high-level goal of this action *if needed*. For simpler actions, this might be omitted.]
+
+## Input (Optional)
+[Define the expected input for the action *if specific and needs clarification*. Example: Path to a configuration file, user query details.]
+- Input 1: [Description]
+- Input 2: [Description]
+
+## Process Flow / Steps
+[Outline the step-by-step process. This is the core of the action definition.]
+1.  **Step 1 Title / Instruction**
+    *   Detail or sub-step...
+    *   Use `@path/to/file` for references.
+2.  **Step 2 Title / Instruction**
+    *   Adhere to specific `constraints` if applicable.
+3.  **Step N Title / Instruction**
+    *   ...
+
+## Guidelines / Key Principles (Optional)
+[Provide specific rules, constraints, or best practices *if needed* for complex actions.]
+- Guideline 1...
+- Guideline 2...
+- Always do X...
+- Never do Y...
+
+## Output (Implied or Described in Steps)
+[The expected output is often described within the final steps of the process (e.g., "report success", "create file X", "apply patch") rather than in a dedicated section.]

@@ -1,0 +1,41 @@
+---
+description: NEW_BEHAVIOUR_TEMPLATE
+globs: 
+alwaysApply: false
+---
+# Behaviour: [Concise Title]
+[Optional: Briefly describe the purpose or scope of this behaviour definition. What does it control or define?]
+
+## Section 1: [Descriptive Title, e.g., Guidelines, Rules, Conventions]
+[Use markdown formatting appropriate for the content. This might be a list, a table, descriptive text, or a combination.]
+
+*   **Guideline/Rule 1:** [Description of the first point]
+    *   [Optional sub-point or clarification]
+*   **Guideline/Rule 2:** [Description...]
+
+[Alternatively, use a table for structured rules or mappings:]
+
+| Condition / Category | Action / Convention | Notes                |
+|----------------------|---------------------|----------------------|
+| [Example Condition]  | [Example Action]    | [Optional context] |
+| ...                  | ...                 | ...                  |
+
+## Section 2: [Descriptive Title, e.g., Examples, Code Snippets, Naming Conventions] (Optional)
+[Provide concrete examples, code snippets, or more detailed specifications if necessary.]
+
+### Subsection (Optional)
+[Use subsections (`###`) to further organize complex topics.]
+
+```javascript
+// Use code blocks for examples, configurations, or specific syntax rules.
+const example = "Use relevant language identifiers";
+```
+
+---
+[Use horizontal rules (`---`) to separate distinct parts if needed.]
+
+## Key Principles / Summary (Optional)
+[Summarize the most critical aspects or overarching principles.]
+
+- Principle 1: ...
+- Principle 2: ...

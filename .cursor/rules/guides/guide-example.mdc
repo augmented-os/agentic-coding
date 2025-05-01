@@ -1,0 +1,56 @@
+---
+description: LIBRARY_USAGE
+globs: 
+alwaysApply: false
+---
+# Guide: Library Usage Policy
+
+## 1. Purpose
+
+This guide outlines the standards and procedures for selecting, adding, and managing third-party libraries and dependencies within our projects. The goal is to maintain consistency, security, performance, and maintainability across the codebase.
+
+## 2. Preferred Libraries
+
+Where applicable, prioritize the use of the following established libraries for common tasks:
+
+*   **Data Manipulation (Python):** `pandas`, `numpy`
+*   **Web Framework (Python):** `FastAPI`
+*   **Frontend Framework (JS/TS):** `React`, `Next.js`
+*   **Utility Functions (JS/TS):** `lodash` (use specific imports: `import get from 'lodash/get'`)
+*   **HTTP Requests:** `requests` (Python), `axios` (JS/TS)
+*   *[Add more as needed]*
+
+Deviations are permissible if these libraries do not meet specific project requirements, but require justification (see Section 3).
+
+## 3. Adding New Libraries
+
+Adding new dependencies increases complexity and potential security risks. Follow these steps before adding a new library:
+
+1.  **Necessity Check:** Is the library truly necessary? Can the functionality be achieved reasonably with existing libraries or standard language features?
+2.  **Investigate Options:** Research alternative libraries. Consider factors like:
+    *   **Maintenance Status:** Is it actively maintained? Check commit history and open issues.
+    *   **Popularity/Community:** Does it have a strong community and good documentation?
+    *   **License:** Is the license compatible with our project? (Prefer permissive licenses like MIT, Apache 2.0).
+    *   **Security:** Are there known vulnerabilities? Check databases like Snyk or GitHub Advisories.
+    *   **Performance:** Does it meet performance requirements?
+    *   **Bundle Size (Frontend):** How significantly does it impact the final bundle size?
+3.  **Consultation:** Propose the new library in the project's communication channel (e.g., Slack `#dev-team`, GitHub Issue). Include:
+    *   The library name and link.
+    *   The problem it solves.
+    *   Why existing/preferred libraries are insufficient.
+    *   A brief summary of the investigation (alternatives considered).
+4.  **Approval:** Obtain consensus or approval from the project lead or relevant stakeholders before adding the dependency.
+5.  **Implementation:** Add the library following standard procedures (e.g., `requirements.txt`, `package.json`) and pin the version. Update relevant documentation if necessary.
+
+## 4. Version Management
+
+*   **Pin Versions:** Always pin dependency versions (e.g., `library==1.2.3` not `library>=1.2.0`) to ensure reproducible builds. Use tools like `pip-tools` or `npm ci` / `yarn install --frozen-lockfile`.
+*   **Regular Updates:** Periodically review and update dependencies to patch security vulnerabilities and benefit from improvements. Use tools like Dependabot or Snyk to automate checks. Coordinate updates to avoid breaking changes.
+
+## 5. Deprecation
+
+If a library becomes obsolete, unmaintained, or needs replacement:
+
+1.  Follow the process in Section 3 to select a replacement.
+2.  Create a plan for migrating away from the deprecated library.
+3.  Communicate the deprecation and migration plan to the team.

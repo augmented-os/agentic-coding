@@ -1,0 +1,62 @@
+---
+description: EXECUTE_TASK
+globs: 
+alwaysApply: false
+---
+## 1. Objective
+
+Your primary goal is to successfully complete the software development task defined in the provided `.yml` task file. This involves understanding the requirements, implementing the changes described in the `work_steps`, and verifying completion against the `acceptance` criteria and `self_checklist`, all while strictly respecting specified `constraints` and utilizing the provided `context`.
+
+## 2. Input
+
+You will receive the path to a task definition file (e.g., `tasks/FEAT-102.yml`) which conforms to the structure defined in `.cursor/.templates/task-schema.yml`.
+
+## 3. Core Execution Process
+
+Follow these steps sequentially:
+
+1.  **Parse & Understand:**
+    *   Read and parse the entire task YAML file.
+    *   Identify the `id` and understand the overall goal from the `title`. Note the `status`, `priority`, and any `dependencies`.
+
+2.  **Load & Analyze Context:**
+    *   **Crucially:** Before making *any* code changes, thoroughly review the resources listed under `context`.
+    *   Read the contents of all files specified in `context.code`. Understand their current state and relevance to the task.
+    *   Read any documents linked in `context.docs`.
+    *   Review designs (`context.designs`) and related tasks (`context.related_tasks`) if provided, to understand the broader picture.
+    *   **Goal:** Build a mental model of the existing system relevant to the task *before* proceeding.
+
+3.  **Execute Work Steps Sequentially:**
+    *   Process the items listed under `work_steps` **strictly in order**.
+    *   For **each step**:
+        *   Identify the `targets` (files to be created or modified).
+        *   Carefully read and understand the `instructions`. Plan the necessary code changes.
+        *   **Strictly adhere to all `constraints` listed for the step.** These are non-negotiable rules. If a constraint seems impossible or conflicts with instructions, stop and report the conflict immediately.
+        *   Implement the changes using the appropriate tools (e.g., `edit_file`). Ensure your changes accurately reflect the instructions and respect the constraints.
+
+4.  **Verify Acceptance Criteria:**
+    *   Once all `work_steps` are completed, proceed to the `acceptance` criteria.
+    *   **`acceptance.automated`**:
+        *   Execute each specified `command` using the appropriate tool (e.g., `run_terminal_cmd`).
+        *   **Verify Success:** The command is considered successful **if and only if it exits with code 0.**
+        *   If a command fails (non-zero exit code), stop execution, report the failure, including the command, its exit code, and any relevant output (`stdout`/`stderr`). Do not proceed further until the issue causing the failure is resolved (which might require revising the work steps).
+    *   **`acceptance.manual`**:
+        *   For each `description`, analyze the final code state and simulate the described check.
+        *   Provide a clear explanation confirming that the manual criterion is met, referencing specific code changes or expected behavior. If a criterion is not met, report it clearly.
+
+5.  **Perform Self-Checklist:**
+    *   Address **each item** in the `self_checklist` individually.
+    *   Verify that the implementation detail described in the checklist item holds true for the final code produced by the `work_steps`.
+    *   Briefly state how you verified each item (e.g., "Verified no `useRef` hooks were added by inspecting the final `ConfigPanel.tsx` code.").
+
+6.  **Report Outcome:**
+    *   If all `work_steps` were completed, all `acceptance` criteria (automated and manual) are met, and all `self_checklist` items are verified, report successful completion of the task `id`.
+    *   If any part failed (constraint violation, failed acceptance command, unmet manual criterion or checklist item), report the specific failure clearly, referencing the task `id` and the step/check involved.
+
+## 4. Key Principles
+
+*   **Context First:** Never modify code without first understanding the relevant context.
+*   **Sequential Steps:** Execute `work_steps` in the specified order.
+*   **Constraints are Law:** Treat `constraints` as absolute requirements. Do not violate them.
+*   **Verify Rigorously:** Use exit codes for automated checks and provide clear reasoning for manual checks and checklist items.
+*   **Report Clearly:** Communicate successes and, more importantly, any failures or blockers encountered with specific details.

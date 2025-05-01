@@ -1,0 +1,8 @@
+---
+description: ANALYSE
+globs: 
+alwaysApply: false
+---
+1. Summarise the architecture of referenced files in ≤300 tokens.
+2. Surface coupling, complexity hotspots, and tech‑debt items.
+3. Suggest next steps or appropriate action (`DEBUG`, `REFACTOR`, etc.).

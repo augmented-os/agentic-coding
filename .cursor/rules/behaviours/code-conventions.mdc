@@ -1,0 +1,70 @@
+---
+description: "Code organisation & naming conventions"
+globs: 
+alwaysApply: true
+---
+## Component organisation
+| Layer | Folder |
+|-------|--------|
+| **Design-system primitives** | `src/components/ui/` |
+| **Shared composite components** | `src/components/` |
+| **Feature-scoped components** | `src/features/{feature}/components/` |
+| **Route pages** | `src/pages/` |
+
+## Hook organisation
+| Kind | Folder |
+|------|--------|
+| Feature-specific hooks | `src/features/{feature}/hooks/` |
+| Shared utility hooks | `src/hooks/` |
+
+---
+
+## Naming conventions
+
+### Folders
+- **camelCase** (`workflowDesigner/`, `integrationsHub/`),  
+  *exception*: the top-level `ui` folder stays simple lowercase.
+
+### Files
+
+| Kind | Location | File name casing | Example file | Export name |
+|------|----------|------------------|--------------|-------------|
+| **UI primitive component** | `src/components/ui` | **kebab-case.tsx** | `card.tsx` | `Card` |
+| **Composite / feature / page component** | everywhere else | **PascalCase.tsx** | `WorkflowHeader.tsx` | `WorkflowHeader` |
+| **React hook** | anywhere | `use-kebab-case.ts` | `use-workflows.ts` | `useWorkflows` |
+| **Type / interface / enum** | – | n/a (inside .ts/.tsx) | – | `WorkflowStatus` |
+| **Utility / other** | – | **camelCase.ts** | `dateFormat.ts` | – |
+
+### Barrel exports
+Every folder that exposes code outside itself **must** have an `index.ts` that re-exports its public surface.
+
+---
+
+## Imports
+- Use **relative paths** (`./` or `../`) **inside** a feature or folder.
+- Use the root alias `@/` for **cross-feature** imports (`@/features/workflows/...`).
+
+---
+
+## Style & tooling
+- Prefer **named exports**.
+- Keep files grouped by **feature boundary**.
+- Code must always pass:  
+  `npm run lint` · `npm run typecheck` · `npm run build` (and `npm run test` when present).
+
+### Lint enforcement (eslint-plugin-unicorn)
+Filename casing is enforced automatically:
+
+```js
+// eslint.config.js (flat)
+overrides: [
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: { 'unicorn/filename-case': ['error', { case: 'kebabCase' }] }
+  },
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    excludedFiles: ['src/components/ui/**/*'],
+    rules: { 'unicorn/filename-case': ['error', { case: 'pascalCase' }] }
+  }
+]

@@ -1,0 +1,10 @@
+---
+description: DEBUG
+globs: 
+alwaysApply: false
+---
+1. Read failing test output in `@tests/last_run.log`.
+2. Locate the topmost stack-trace entry inside `src/**`.
+3. Open the referenced file and propose a fix.
+4. Apply patch, run `npm test --silent`.
+5. Repeat up to two times, then stop and report remaining failures.

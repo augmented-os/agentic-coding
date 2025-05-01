@@ -1,0 +1,41 @@
+---
+description: NEW_GUIDE_TEMPLATE
+globs: 
+alwaysApply: false
+---
+# Guide: [Guide Title]
+
+## 1. Purpose
+
+*   [Clearly state the goal of this guide. What problem does it solve or what standard does it establish?]
+*   [Explain *why* this standard is important (e.g., consistency, maintainability, performance, security).]
+
+## 2. Scope
+
+*   [Define precisely what this guide covers.]
+*   [Mention any specific areas, languages, frameworks, or contexts where this guide applies.]
+*   [Optionally, mention what is *out of scope* for this guide.]
+
+## 3. Guideline / Standard / Procedure
+
+*   [This is the core section. Detail the specific rules, standards, or steps.]
+*   [Use clear, unambiguous language.]
+*   [Use numbered or bulleted lists for clarity.]
+*   [Include code examples (using appropriate markdown formatting) where helpful.]
+    *   **Do:** Show examples of correct/preferred code/practice.
+    *   **Don't:** Show examples of incorrect/discouraged code/practice.
+
+```markdown
+# Good Example
+code_example = "Correct formatting/logic"
+```
+
+```markdown
+# Bad Example
+code_example = "Incorrect formatting/logic"
+```
+
+## 4. Rationale (Optional but Recommended)
+
+*   [Explain the reasoning behind the guidelines if it's not immediately obvious.]
+*   [Mention trade-offs considered, if any.]

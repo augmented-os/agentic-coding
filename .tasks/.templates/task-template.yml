@@ -1,0 +1,35 @@
+id: TKT-000
+title: <short imperative summary>
+status: todo # [todo, in_progress, blocked, needs_review, done]
+priority: medium # [high, medium, low]
+# assignee: <username_or_agent>
+# dependencies:
+#   - TKT-001
+context:
+  code:
+    - <path/to/relevant/code.ts>
+  # docs:
+  #   - <path/to/relevant/docs.md>
+  # designs:
+  #   - <url_or_path/to/design>
+  # related_tasks:
+  #   - FEAT-123
+work_steps:
+  - step_id: 1 # Optional
+    targets:
+      - <path/to/modified/file.ts>
+    instructions: <Specific action for this step>
+    # constraints:
+    #   - <Constraint or thing to avoid>
+acceptance:
+  automated:
+    - command: "npm run test --silent"
+      description: <What this test verifies>
+    # - command: "npm run typecheck"
+    #   description: "Ensure no TypeScript errors."
+  manual:
+    - description: <Manual check to perform>
+# self_checklist:
+#   - <Implementation detail to verify>
+# creation_date: <YYYY-MM-DDTHH:MM:SSZ> # Automatically added potentially
+# last_updated: <YYYY-MM-DDTHH:MM:SSZ> # Automatically added potentially

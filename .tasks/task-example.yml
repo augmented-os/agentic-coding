@@ -1,0 +1,50 @@
+id: FEAT-102
+title: Implement Node Deletion Confirmation Dialog
+status: todo
+priority: high
+assignee: agent
+dependencies:
+  - FEAT-100 # Prerequisite: Basic node selection must be implemented
+context:
+  code:
+    - src/features/workflowDesigner/components/designerCanvas/DesignerCanvas.tsx
+    - src/features/workflowDesigner/state/workflowStore.ts
+    - src/components/ui/AlertDialog.tsx # Shared UI component
+  docs:
+    - .cursor/guides/ui/confirmations.mdc
+  designs:
+    - https://www.figma.com/file/xyz/link-to-node-deletion-frame
+work_steps:
+  - step_id: 1
+    targets:
+      - src/features/workflowDesigner/components/designerCanvas/DesignerCanvas.tsx
+      - src/features/workflowDesigner/components/modals/DeleteConfirmationDialog.tsx # New component
+    instructions: Create and integrate a `DeleteConfirmationDialog` component using the shared `AlertDialog`. Trigger it when the user attempts to delete a node (e.g., via Delete key or context menu).
+    constraints:
+      - Use Zustand store (`workflowStore`) for managing dialog visibility state.
+      - Ensure dialog is accessible and follows WAI-ARIA patterns.
+  - step_id: 2
+    targets:
+      - src/features/workflowDesigner/state/workflowStore.ts
+    instructions: Add state and actions to `workflowStore` to handle the visibility of the delete confirmation dialog and the ID of the node targeted for deletion.
+  - step_id: 3
+    targets:
+      - src/features/workflowDesigner/components/designerCanvas/DesignerCanvas.tsx
+    instructions: Implement the actual node deletion logic in the store action, triggered only upon confirmation in the dialog.
+acceptance:
+  automated:
+    - command: "npm run typecheck"
+      description: "Verify no TypeScript errors were introduced."
+    - command: "npm test --silent -- src/features/workflowDesigner/"
+      description: "Pass all unit and integration tests for the workflow designer feature."
+  manual:
+    - description: "Verify selecting a node and pressing 'Delete' key opens the confirmation dialog."
+    - description: "Verify clicking 'Cancel' in the dialog closes it without deleting the node."
+    - description: "Verify clicking 'Confirm' in the dialog closes it and removes the node from the canvas and state."
+    - description: "Verify the dialog looks correct according to the Figma design."
+self_checklist:
+  - "Dialog state is managed centrally in the zustand store."
+  - "No direct DOM manipulation used for dialog."
+  - "Code follows project naming and style conventions."
+# creation_date: 2025-05-01T10:00:00Z
+# last_updated: 2025-05-01T10:00:00Z 

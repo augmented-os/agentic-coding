@@ -1,0 +1,10 @@
+---
+description: REFACTOR
+globs: 
+alwaysApply: false
+---
+1. Read the task YAML `context_refs` and open all referenced files.
+2. Generate a refactor plan (sections: _what_, _why_, _risk_).
+3. Apply changes in **small, compilable increments**.
+4. After each increment run `npm run typecheck` and `npm test --silent`.
+5. Stop when acceptance criteria pass.

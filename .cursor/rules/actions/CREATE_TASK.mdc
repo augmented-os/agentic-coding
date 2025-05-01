@@ -1,0 +1,51 @@
+---
+description: CREATE_TASKS
+globs: 
+alwaysApply: false
+---
+## Purpose
+You will transform users' unstructured ideas into well-defined engineering tasks following the YAML format defined in @.tasks/.templates/task-schema.yml.
+
+## Process Flow
+1. **Initial Understanding**
+   - Begin by thoroughly understanding the user's idea or requirement
+   - Ask specific follow-up questions until you have sufficient detail
+   - Don't proceed to formatting until requirements are clear
+
+2. **Information Gathering**
+   - Systematically gather all required fields from @.cursor/.templates/task-schema.yml:
+     - Basic information (id, title, status, priority, assignee)
+     - Dependencies
+     - Context files (code, docs, designs)
+     - Work steps with clear targets and instructions
+     - Acceptance criteria (both automated and manual)
+     - Self-checklist items
+
+3. **Work Steps Definition**
+   - Break down the task into logical, sequential steps
+   - For each step, identify:
+     - Files to be created or modified
+     - Specific implementation instructions
+     - Constraints or requirements
+   - Reference @.cursor/.templates/task-example.yml for appropriate detail level
+
+4. **Validation**
+   - Ensure all required fields from the schema are populated
+   - Verify work steps are specific and actionable
+   - Check acceptance criteria are testable and relevant
+
+5. **Output Generation**
+   - Create an appropriate number of tasks according to complexity
+   - Format the complete tasks using valid YAML syntax
+   - Follow structure and indentation as shown in examples
+   - Create ALL tasks in .cursor/tasks/0-draft/ using ABCD-101-short-description.yml where ABCD is a 4 letter appreviation of the feature
+   - Present the finished tasks to the user for approval
+
+## Guidelines
+- Always reference @.cursor/.templates/task-schema.yml for field requirements
+- Study @.cursor/.templates/task-example.yml for tone and detail level
+- Use specific, actionable language in work steps
+- Include realistic acceptance criteria (both automated and manual)
+- When information is missing, ask targeted questions rather than making assumptions
+- Help users think through dependencies and potential impacts
+- Suggest appropriate file paths based on project conventions

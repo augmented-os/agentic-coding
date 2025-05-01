@@ -1,0 +1,128 @@
+$schema: "https://json-schema.org/draft-07/schema#"
+
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
+# Schema for defining a task in the workflow-visual-builder project.
+
+type: object
+properties:
+  id:
+    type: string
+    description: Unique identifier for the task (e.g., TKT-123, FEAT-456). Follows Jira/ticket naming convention.
+  title:
+    type: string
+    description: A short, imperative summary of the task's goal (e.g., "Refactor User Authentication").
+  status:
+    type: string
+    enum: [todo, in_progress, blocked, needs_review, done]
+    description: Current status of the task.
+    default: todo
+  priority:
+    type: string
+    enum: [high, medium, low]
+    description: Priority level of the task.
+    default: medium
+  assignee:
+    type: string
+    description: Identifier for the person or agent assigned to the task (e.g., "chrispoulter", "agent").
+  dependencies:
+    type: array
+    items:
+      type: string
+    description: List of task IDs that must be completed before this task can start.
+  context:
+    type: object
+    properties:
+      code:
+        type: array
+        items:
+          type: string
+        description: List of relative paths to code files relevant to the task.
+      docs:
+        type: array
+        items:
+          type: string
+        description: List of relative paths to documentation files or guides relevant to the task.
+      designs:
+        type: array
+        items:
+          type: string
+        description: List of URLs or paths to design mockups or specifications (e.g., Figma links).
+      related_tasks:
+        type: array
+        items:
+          type: string
+        description: List of related task IDs (e.g., parent epics, subsequent tasks).
+    description: References to files, documents, or other resources needed to understand and complete the task.
+  work_steps:
+    type: array
+    items:
+      type: object
+      properties:
+        step_id:
+          type: [string, number]
+          description: Optional unique identifier for the step within the task.
+        targets:
+          type: array
+          items:
+            type: string
+          description: List of relative paths to files being modified or created in this step. Can be empty for non-code steps.
+        instructions:
+          type: string
+          description: Specific instructions for what needs to be done in this step.
+        constraints:
+          type: array
+          items:
+            type: string
+          description: List of things to avoid or specific requirements for the implementation in this step.
+      required:
+        - instructions
+      description: A specific, actionable step required to complete the task.
+    description: A list of sequential steps to perform to complete the overall task.
+  acceptance:
+    type: object
+    properties:
+      automated:
+        type: array
+        items:
+          type: object
+          properties:
+            command:
+              type: string
+              description: The shell command to run for verification (e.g., "npm run test").
+            description:
+              type: string
+              description: Explanation of what this command verifies.
+          required:
+            - command
+        description: List of automated checks (e.g., tests, linters, type checks) that must pass.
+      manual:
+        type: array
+        items:
+          type: object
+          properties:
+            description:
+              type: string
+              description: Description of a manual check or verification step required.
+          required:
+            - description
+        description: List of manual verification steps (e.g., visual UI checks, behavior confirmation).
+    description: Criteria that must be met to consider the task successfully completed.
+  self_checklist:
+    type: array
+    items:
+      type: string
+    description: A list of implementation-specific checks for the developer/agent to verify before marking the task as done (e.g., "No unnecessary console logs", "Followed specific coding pattern X").
+  creation_date:
+    type: string
+    format: date-time
+    description: Timestamp when the task was created.
+  last_updated:
+    type: string
+    format: date-time
+    description: Timestamp when the task was last modified.
+
+required:
+  - id
+  - title
+  - work_steps
+  - acceptance 

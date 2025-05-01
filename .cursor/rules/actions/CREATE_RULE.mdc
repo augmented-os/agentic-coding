@@ -1,0 +1,47 @@
+---
+description: CREATE_RULE
+globs: 
+alwaysApply: false
+---
+# Create a New Rule
+
+This document outlines the process for creating a new rule. Start by identifying the type of rule you need to create and copy the corresponding template.
+
+## 1. Choose and Copy a Template
+
+Select the template file from the table below that best matches the type of rule you want to create, then make a copy.
+
+| Rule Type  | Template File                | Description                                   |
+| :--------- | :--------------------------- | :-------------------------------------------- |
+| Action     | `.cursor/.templates/action.mdc`   | Defines a specific, concrete action the AI can take. |
+| Behaviour  | `.cursor/.templates/behaviour.mdc`| Describes a general behaviour or approach.    |
+| Guide      | `.cursor/.templates/guide.mdc`    | Provides guidance on a specific topic or task. |
+| Tool       | `.cursor/.templates/tool.mdc`     | Describes how to use a specific tool.         |
+
+## 2. Rename the File
+
+Rename the copied file according to the naming conventions (e.g., `@my_new_action.mdc`, `@my_guide.mdc`). The name should clearly indicate the rule's purpose.
+
+## 3. Complete the Frontmatter
+
+At the top of the new file, you'll find the frontmatter section enclosed in `---`. Fill this in as follows:
+
+```yaml
+---
+Name: My New Rule Name # A descriptive name for your rule
+Rule Type: Agent Requested # Usually 'Agent Requested', except for Behaviour rules
+Description: A brief description # A short summary of the rule's purpose
+---
+```
+
+*   **Name:** Provide a clear, descriptive name for your rule (e.g., `Format Python Code`, `Use Web Search for Current Events`).
+*   **Rule Type:**
+    *   For **Action**, **Guide**, and **Tool** rules, set this to `Agent Requested`.
+    *   For **Behaviour** rules, set this to `Always`.
+*   **Description:**
+    *   For **Action**, **Guide**, and **Tool** rules, write a concise description (e.g., `Formats Python code using Black`, `Guides the AI on when to ask clarifying questions`).
+    *   For **Behaviour** rules (where `Rule Type` is `Always`), the `Description` is not needed and can be omitted or left blank (the template might handle this).
+
+## 4. Fill in the Rule Content
+
+Follow the specific instructions within the copied template to populate the main content of the rule. The templates provide detailed guidance on the necessary sections and information required for each rule type.

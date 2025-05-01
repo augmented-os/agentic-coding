@@ -1,0 +1,49 @@
+---
+description: SUPABASE_MCP
+globs: 
+alwaysApply: false
+---
+# Tool: Supabase CLI
+
+## 1. Purpose
+
+This document describes the usage standards and common commands for the official Supabase Command Line Interface (CLI). The CLI is used for local development, managing project environments, database migrations, Edge Functions, and interacting with your Supabase project resources.
+
+## 2. Common Commands & Workflows
+
+| Command                       | Description                                                              | Usage Guidance & Notes                                                                                                |
+| :---------------------------- | :----------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `supabase login / logout`     | Authenticate/de-authenticate the CLI with your Supabase account.         | `login` is required for most commands interacting with remote projects.                                               |
+| `supabase link / unlink`      | Connect/disconnect the local environment to a remote Supabase project.   | `link` requires `--project-ref`. Essential for `db push/pull`, `secrets set/list`, etc.                             |
+| `supabase init`               | Creates the `supabase/` configuration directory.                         | Run once per local project setup.                                                                                     |
+| `supabase start / stop`       | Starts/stops the local Supabase stack (Docker required).                 | Use for local development and testing.                                                                                |
+| `supabase db diff`            | Detects differences between local migration files and remote/local DB.   | **Run before `db push`**. Use `-f <migration-name>` to create a new migration file from detected changes.             |
+| `supabase migration new <name>` | Creates a new, empty migration file in `supabase/migrations/`.         | Manually add SQL schema changes to this file.                                                                         |
+| `supabase db reset`           | Resets the local database to the state defined by migrations.            | Destructive for local data. Useful for a clean state.                                                                 |
+| `supabase db push`            | Applies local migration files (not yet applied) to the *linked remote DB*. | **Potentially destructive.** Always run `supabase db diff` first. Review migrations carefully. Use `--dry-run` first. | 
+| `supabase db remote commit`   | Dumps the *remote* database schema into `supabase/schema.sql`.           | **Deprecated.** Prefer `db pull`.                                                                                     |
+| `supabase db pull`            | Creates a new migration file based on *remote* schema changes.           | Use if remote schema changes were made outside the migration system (e.g., via Studio). Review generated migration. | 
+| `supabase db remote psql ...` | Connects to the remote database using `psql`.                            | Allows direct SQL execution. Use `-c "<SQL>"` for single commands. **Use destructive SQL with extreme caution.**     |
+| `supabase functions new <name>` | Creates boilerplate for a new Edge Function.                           | Place function code in `supabase/functions/<name>/index.ts`.                                                          |
+| `supabase functions deploy <name>` | Deploys an Edge Function to the linked remote project.                 | Use `--no-verify-jwt` if needed. Ensure function dependencies are correct.                                            |
+| `supabase functions serve`    | Serves Edge Functions locally for testing.                               | Requires `supabase start`.                                                                                            |
+| `supabase secrets list`       | Lists environment variables set for the linked remote project.           |                                                                                                                       |
+| `supabase secrets set <...> ` | Sets environment variables for the remote project (e.g., `FOO=bar`).     | Requires function redeployment (`functions deploy`) to take effect. Use `secrets set --env-file .env`.              |
+| `supabase secrets unset <...>`| Removes environment variables.                                           |                                                                                                                       |
+| `supabase storage list ...`   | Lists buckets or objects in remote Supabase Storage.                     | Requires `link`.                                                                                                      |
+| `supabase storage cp ...`     | Copies files/folders to/from remote Supabase Storage.                    | Requires `link`.                                                                                                      |
+| `supabase storage rm ...`     | Removes objects from remote Supabase Storage.                            | **Potentially destructive.** Use `-r` for recursive delete. **Check path carefully.**                               | 
+
+## 3. Usage Restrictions & Best Practices
+
+*   **⚠️ Always check with the user before executing potentially destructive commands**, especially:
+    *   `supabase db push` (Review `db diff` first!)
+    *   `supabase db remote psql` when using `UPDATE`, `DELETE`, `TRUNCATE`, `DROP`.
+    *   `supabase storage rm`
+    *   Commands with `--force` flags.
+*   **Migration Workflow:** Strictly follow the migration workflow (`db diff`, `migration new`/`db pull`, review SQL, `db push`) to manage database schema changes. Avoid making schema changes directly in the Supabase Studio UI for linked projects.
+*   **Remote vs. Local:** Be aware of whether a command affects the *local* environment (`start`, `stop`, `reset`) or the *linked remote* project (`push`, `pull`, `secrets`, `deploy`, `storage`).
+*   **Project Linking:** Double-check the linked project (`supabase link`) before running commands that modify the remote instance.
+*   **Secrets Management:** Do not commit sensitive information directly in code. Use `supabase secrets` for API keys and other sensitive configuration. Add `.env` files to `.gitignore`.
+*   **Review Diffs:** Always carefully review the output of `supabase db diff` before generating or applying migrations.
+*   **Backup Strategy:** While migrations help, ensure a proper database backup strategy is in place for production projects, independent of the CLI.

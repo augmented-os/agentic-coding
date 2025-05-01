@@ -1,0 +1,19 @@
+---
+description: "Select appropriate Cursor action based on task context"
+globs: 
+alwaysApply: true
+---
+# Select and request the correct action playbook
+1. Inspect the latest user or runbook request.
+2. Pick the **first** matching row.  
+3. **Request** the rule whose **description** is shown.
+4. Follow the playbook's steps exactly.
+
+| Situation (first match wins)                           | Request rule with description |
+|--------------------------------------------------------|-------------------------------|
+| Failing unit / integration tests, red CI, “fix tests”  | DEBUG                         |
+| Behaviour-preserving refactor (“clean up”, “split”)    | REFACTOR                      |
+| Define a new automated task                            | CREATE_TASK                   |
+| Execute a defined task                                 | EXECUTE_TASK                  |
+| Generate technical documentation                       | CREATE_GUIDE                  |
+| Architecture insight / “explain code”, “analyse”       | ANALYSE                       |
