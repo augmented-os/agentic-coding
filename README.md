@@ -1,11 +1,11 @@
 # Agentic Coding CLI 🚀
-_A CLI tool to set up Cursor rules for AI-augmented engineering workflows_
+_A CLI tool to set up Cursor rules and tasks for AI-augmented engineering workflows_
 
 ---
 
 ## Overview
 
-This CLI tool helps you quickly set up a comprehensive set of Cursor rules for agentic coding. Instead of manually creating rules files, simply run one command to copy a battle-tested collection of rules, actions, guides, and tools into your project.
+This CLI tool helps you quickly set up a comprehensive set of Cursor rules and task templates for agentic coding. Instead of manually creating rules files, simply run one command to copy a battle-tested collection of rules, actions, guides, tools, and task templates into your project.
 
 The rules work as part of a complete agentic coding system:
 - **Rules** (installed by this CLI) teach the AI *how* to build software
@@ -35,16 +35,23 @@ Navigate to any project directory and run:
 agentic-coding setup
 ```
 
-This will copy all rules to `.cursor/rules/` in your current directory, creating:
+This will copy all rules and task templates to your current directory, creating:
 
 ```
 your-project/
-└── .cursor/
-    └── rules/
-        ├── actions/     # Step-by-step playbooks
-        ├── behaviours/  # Always-on guardrails  
-        ├── guides/      # Deep-dive reference docs
-        └── tools/       # External CLI/API cheat-sheets
+├── .cursor/
+│   └── rules/
+│       ├── actions/     # Step-by-step playbooks
+│       ├── behaviours/  # Always-on guardrails  
+│       ├── guides/      # Deep-dive reference docs
+│       └── tools/       # External CLI/API cheat-sheets
+└── .tasks/
+    ├── 0-draft/         # Ideas being refined
+    ├── now/             # Current sprint work  
+    ├── next/            # Prioritized backlog
+    ├── later/           # Future considerations
+    ├── done/            # Completed tasks
+    └── README.md        # Task system documentation
 ```
 
 ## What's Included
@@ -72,6 +79,12 @@ Cheat-sheets for external CLIs and APIs:
 - Common command patterns
 - Configuration templates
 - Integration guides
+
+### 📝 Tasks
+Structured YAML templates for work organization:
+- Folder structure for task lifecycle (draft → now → next → later → done)
+- YAML schema for executable specifications
+- Context-aware task definitions with acceptance criteria
 
 ## Rule System Architecture
 
