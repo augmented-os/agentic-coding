@@ -2,14 +2,14 @@
   "name": "agentic-coding",
   "version": "0.0.1",
   "bin": {
-    "agentic-coding": "./cli.js"
+    "agentic-coding": "cli.js"
   },
   "type": "module",
   "license": "MIT",
   "description": "CLI tool to set up Cursor rules and tasks for vastly improved agentic coding",
-  "repository": {                 
+  "repository": {
     "type": "git",
-    "url": "https://github.com/augmented-os/agentic-coding.git"
+    "url": "git+https://github.com/augmented-os/agentic-coding.git"
   },
   "files": [
     "cli.js",
@@ -24,13 +24,13 @@
     "agentic",
     "engineering"
   ],
-  "publishConfig": {             
+  "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "yargs": "^18.0.0"
   },
-  "engines": {                     
+  "engines": {
     "node": ">=18"
   }
 }
