@@ -35,6 +35,20 @@ async function copyDirectory(src, dest) {
   }
 }
 
+/**
+ * Ensure that a given list of sub‑directories exists under a parent directory.
+ * It creates them recursively if they are missing.
+ *
+ * @param {string} parentDir - The base directory where the sub‑folders should live.
+ * @param {string[]} subdirs - An array of folder names to create.
+ */
+async function ensureSubdirectories(parentDir, subdirs) {
+  for (const dir of subdirs) {
+    const dirPath = path.join(parentDir, dir);
+    await fs.mkdir(dirPath, { recursive: true });
+  }
+}
+
 yargs(hideBin(process.argv))            // ← call the factory once
   .command(
     'setup',
@@ -78,6 +92,10 @@ yargs(hideBin(process.argv))            // ← call the factory once
         
         // Copy the tasks directory
         await copyDirectory(tasksSourcePath, tasksDestPath);
+        
+        // Ensure default task buckets exist so they are present even if npm stripped empty folders
+        await ensureSubdirectories(tasksDestPath, ['0-draft', '1-now', '2-next', '3-later', '9-done']);
+        console.log(`✅ Ensured task bucket folders (0-draft, 1-now, 2-next, 3-later, 9-done)`);
         
         console.log(`✅ Successfully copied tasks to ${tasksDestPath}`);
         console.log(`Rules are now available in .cursor/rules/`);
