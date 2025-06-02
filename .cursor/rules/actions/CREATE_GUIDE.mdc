@@ -1,0 +1,27 @@
+---
+description: CREATE_GUIDE
+globs: 
+alwaysApply: false
+---
+
+1. **Locate template**  
+   Copy `.cursor/.templates/rule.mdc` → `.cursor/guides/<area>/<slug>.mdc`.
+
+2. **Fill front-matter**  
+   * `description:` - one-line summary.  
+   * `globs:` - add path patterns **only** if the guide should auto-attach (e.g. `["src/api/**"]`).  
+   * Leave `alwaysApply:` `false` unless this guide is universally required.
+
+3. **Write the body**  
+   * Start with a **title** (H1).  
+   * Provide rationale, patterns, and code samples.  
+   * Include `@file` references to exemplar source files where helpful.
+
+4. **Lint**  
+   Run `npm run lint:rules`. Ensure:  
+   * YAML parses.  
+   * Guide ≤ 500 lines.  
+   * All `@file` paths exist.
+
+5. **Commit**  
+   Stage the file and push. The pre-commit hook will verify size and validity.

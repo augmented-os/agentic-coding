@@ -3,8 +3,48 @@ description: DEBUG
 globs: 
 alwaysApply: false
 ---
-1. Read failing test output in `@tests/last_run.log`.
-2. Locate the topmost stack-trace entry inside `src/**`.
-3. Open the referenced file and propose a fix.
-4. Apply patch, run `npm test --silent`.
-5. Repeat up to two times, then stop and report remaining failures.
+## Purpose / Objective
+Systematically diagnose and resolve failing tests or runtime errors by analyzing stack traces, identifying root causes, and implementing targeted fixes.
+
+## Input
+- Failing test output (typically in `@tests/last_run.log`)
+- Error messages or stack traces from CI/runtime failures
+- User reports of broken functionality
+
+## Process Flow / Steps
+1. **Analyze Test Output**
+   * Read failing test output in `@tests/last_run.log`
+   * Identify the specific test cases that are failing
+   * Extract error messages and categorize failure types (syntax, logic, dependency, etc.)
+
+2. **Locate Root Cause**
+   * Find the topmost stack-trace entry inside `src/**` (ignore external dependencies)
+   * Trace the execution path to understand the failure point
+   * Identify whether it's a code logic issue, missing dependency, or configuration problem
+
+3. **Develop and Apply Fix**
+   * Open the referenced file and analyze the problematic code
+   * Propose a targeted fix that addresses the root cause
+   * Apply the patch ensuring it follows project coding standards
+   * Verify the fix doesn't introduce new issues
+
+4. **Validate Solution**
+   * Run `npm test --silent` to verify the fix
+   * Check that previously passing tests still pass
+   * Confirm the specific failing test now passes
+
+5. **Iterate if Needed**
+   * If tests still fail, repeat steps 2-4 up to two additional times
+   * After three attempts, stop and report remaining failures with analysis
+   * Document any unresolved issues for further investigation
+
+## Guidelines / Key Principles
+- Focus on the topmost application code in stack traces (ignore external library frames)
+- Make minimal, targeted changes rather than broad refactors during debugging
+- Always run tests after each fix to ensure no regression
+- Document complex fixes with inline comments for future maintainers
+- If multiple tests fail, prioritize fixing the most fundamental failures first
+- Never make more than 3 debugging attempts in a single session
+
+## Output
+Either successfully resolved tests or a detailed report of remaining failures with recommended next steps for further investigation.

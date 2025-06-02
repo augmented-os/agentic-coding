@@ -1,0 +1,55 @@
+---
+description: EXPLAIN_AGENTIC_CODING
+globs: 
+alwaysApply: false
+---
+# Explain Agentic Coding System
+
+## Objective
+Provide a clear, concise explanation of the agentic coding workflow to users asking "what is this system?" or similar questions.
+
+## Response Structure
+Always respond with this exact structure:
+
+### 1. Core System Overview
+Explain that this is a **3-component system**:
+- **Rules** teach the AI *how* to build software
+- **Tasks** tell the AI *what* to build next  
+- **Code** gets created and modified through this workflow
+
+### 2. Rule Types Table
+Present the 4 rule types in a clear table format:
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| **Actions** | Step-by-step playbooks the AI can invoke | `EXECUTE_TASK`, `DEBUG`, `ANALYSE` |
+| **Behaviours** | Always-on conventions and guardrails | Code style, response tone, action selection |
+| **Guides** | In-depth standards and technical policies | Architecture decisions, security guidelines |
+| **Tools** | Cheat-sheets for external CLIs/APIs | Supabase commands, deployment scripts |
+
+### 3. Task Definition
+Explain tasks are **self-describing YAML files** with:
+- **Context**: Which files/docs to load first
+- **Work Steps**: Ordered, file-specific instructions  
+- **Acceptance**: Automated tests + manual checks to prove completion
+
+Mention the lifecycle: `0-draft/` → `1-now/` → `2-next/` → `3-later/` → `9-done/`
+
+### 4. The Virtuous Loop
+State clearly: "Ideas become **Tasks** → Tasks invoke **Rules** → Rules change **Code** → passing code closes Tasks"
+
+### 5. AI Assistant Capabilities
+Mention: "I can help you **create new rules using templates** from `.cursor/.templates/` or **explain what existing rules do** - just ask!"
+
+### 6. Follow-up Questions
+Always end with these 4 suggested questions:
+1. **"What specific type of rule do you need?"** (Action, Behaviour, Guide, or Tool)
+2. **"Do you want to create a new task or execute an existing one?"**
+3. **"Which part of the agentic workflow are you working on?"** (Ideas → Tasks → Rules → Code)
+4. **"Do you need help with the task YAML structure or rule templates?"**
+
+## Key Principles
+- Keep it **clear and concise** - no more than 200 words total
+- Use **markdown formatting** for structure
+- Reference @README.md @.cursor/README.md @tasks/README.md at the end
+- Focus on the **workflow loop** as the core concept

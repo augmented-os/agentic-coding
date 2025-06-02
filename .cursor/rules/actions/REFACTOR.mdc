@@ -3,8 +3,49 @@ description: REFACTOR
 globs: 
 alwaysApply: false
 ---
-1. Read the task YAML `context_refs` and open all referenced files.
-2. Generate a refactor plan (sections: _what_, _why_, _risk_).
-3. Apply changes in **small, compilable increments**.
-4. After each increment run `npm run typecheck` and `npm test --silent`.
-5. Stop when acceptance criteria pass.
+## Purpose / Objective
+Safely improve code structure, maintainability, and design quality through behavior-preserving transformations applied in small, validated increments.
+
+## Input
+- Files or components identified for refactoring
+- User refactoring request (e.g., "clean up", "split components", "extract utilities")
+- Acceptance criteria or quality goals for the refactoring
+
+## Process Flow / Steps
+1. **Preparation and Analysis**
+   * Identify and open all files requiring refactoring
+   * Understand the current code structure and refactoring scope
+   * Review existing tests to understand expected behavior
+
+2. **Create Refactor Plan**
+   * Generate a comprehensive refactor plan with three sections:
+     - **What**: Specific changes to be made (extract functions, rename variables, restructure modules)
+     - **Why**: Justification for each change (improved readability, reduced coupling, better separation of concerns)
+     - **Risk**: Potential issues and mitigation strategies (breaking changes, test updates needed)
+
+3. **Execute Incremental Changes**
+   * Apply changes in **small, compilable increments** (one logical change at a time)
+   * Ensure each increment maintains working functionality
+   * Focus on single-responsibility changes (don't mix extraction with renaming)
+
+4. **Validate Each Increment**
+   * After each increment, run `npm run typecheck` to catch type errors
+   * Run `npm test --silent` to ensure no behavioral regression
+   * Fix any issues before proceeding to the next increment
+
+5. **Complete and Verify**
+   * Continue incremental changes until acceptance criteria are met
+   * Perform final validation with full test suite
+   * Verify the refactored code meets quality goals
+
+## Guidelines / Key Principles
+- Never change behavior while refactoring - only improve structure
+- Make one logical change per increment (extract method, rename variable, move file)
+- Always validate after each increment before proceeding
+- If tests fail, immediately revert the last change and try a smaller increment
+- Prioritize readability and maintainability improvements
+- Document any complex structural changes with inline comments
+- Stop immediately if acceptance criteria are satisfied
+
+## Output
+Improved code structure that maintains identical behavior while meeting the specified acceptance criteria and quality goals.

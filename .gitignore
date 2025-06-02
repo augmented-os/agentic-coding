@@ -1,0 +1,4 @@
+node_modules/
+.repomix/
+.DS_Store
+.vscode/

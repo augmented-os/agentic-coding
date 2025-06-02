@@ -11,9 +11,11 @@ alwaysApply: true
 
 | Situation (first match wins)                           | Request rule with description |
 |--------------------------------------------------------|-------------------------------|
-| Failing unit / integration tests, red CI, “fix tests”  | DEBUG                         |
-| Behaviour-preserving refactor (“clean up”, “split”)    | REFACTOR                      |
+| User asks "what is agentic coding?" or similar question  | EXPLAIN_AGENTIC_CODING        |
+| Want to create a new rule (Action, Behaviour, Guide, Tool) | CREATE_RULE               |
+| Want to create documentation or guide                 | CREATE_GUIDE                  |
+| Failing unit / integration tests, red CI, "fix tests"  | DEBUG                         |
 | Define a new automated task                            | CREATE_TASK                   |
 | Execute a defined task                                 | EXECUTE_TASK                  |
-| Generate technical documentation                       | CREATE_GUIDE                  |
-| Architecture insight / “explain code”, “analyse”       | ANALYSE                       |
+| Behaviour-preserving refactor ("clean up", "split")    | REFACTOR                      |
+| Architecture insight / "explain code", "analyse"       | ANALYSE                       |

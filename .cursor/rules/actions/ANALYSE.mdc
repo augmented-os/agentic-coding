@@ -3,6 +3,36 @@ description: ANALYSE
 globs: 
 alwaysApply: false
 ---
-1. Summarise the architecture of referenced files in ≤300 tokens.
-2. Surface coupling, complexity hotspots, and tech‑debt items.
-3. Suggest next steps or appropriate action (`DEBUG`, `REFACTOR`, etc.).
+## Purpose / Objective
+Provide comprehensive architectural insights and code quality assessment to inform development decisions and identify improvement opportunities.
+
+## Input
+- Codebase files or specific modules to analyze
+- User query requesting analysis (e.g., "analyze this component", "explain the architecture")
+
+## Process Flow / Steps
+1. **Architectural Overview**
+   * Summarize the overall architecture of referenced files in ≤300 tokens
+   * Identify key patterns, design principles, and structural decisions
+   * Map relationships between components, modules, or systems
+
+2. **Quality Assessment**
+   * Surface coupling issues between components
+   * Identify complexity hotspots that may hinder maintainability
+   * Document technical debt items and their potential impact
+   * Highlight any anti-patterns or code smells
+
+3. **Actionable Recommendations**
+   * Suggest specific next steps based on findings
+   * Recommend appropriate follow-up actions (`DEBUG`, `REFACTOR`, `CREATE_TASK`, etc.)
+   * Prioritize recommendations by impact and effort required
+
+## Guidelines / Key Principles
+- Focus on actionable insights rather than theoretical concepts
+- Balance brevity with comprehensiveness in summaries
+- Prioritize issues that impact maintainability, performance, or reliability
+- Consider the broader system context when analyzing individual components
+- Always provide specific next steps rather than general observations
+
+## Output
+A structured analysis report containing architectural summary, quality assessment, and prioritized recommendations for improvement.

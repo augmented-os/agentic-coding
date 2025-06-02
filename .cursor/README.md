@@ -19,7 +19,7 @@ Every rule is a single **MDC file**:
 ---
 description: One-line summary       # used for search & selection
 globs:                              # optional path patterns that auto-attach
-alwaysApply: false                  # true = “Always” rule, false = “Agent-Requested”
+alwaysApply: false                  # true = "Always" rule, false = "Agent-Requested"
 ---
 # Markdown body with instructions, lists, code blocks, @file references…
 
@@ -73,4 +73,4 @@ Creating a new rule
 	3.	Write clear, focused content (≤ 500 lines is a good target).
 	4.	Commit – Cursor will pick it up immediately.
 
-See rules/actions/CREATE_RULE.mdc for detailed guidance.
+See actions/CREATE_RULE.mdc for detailed guidance.
